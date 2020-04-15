@@ -26,7 +26,7 @@ int main (int argc, char** argv){
     printf("\t¡Gracias!\n");
 
     printf("\n\tAgregamos un nuevo commit");
-    printf("\n\tPrueba 2.");
+    printf("\n\tPrueba 2.\n");
 
     return 0;
 }
