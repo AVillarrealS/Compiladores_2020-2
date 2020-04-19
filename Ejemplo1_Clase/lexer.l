@@ -16,5 +16,4 @@ id [a-zA-Z_][a-zA-Z_0-9]*
 {id}    { return ID; }
 [ \t\n\r]+  {}
 .   { printf("Error Léxico: %s\n", yytext);}
-
 %%

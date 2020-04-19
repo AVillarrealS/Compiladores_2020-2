@@ -12,6 +12,11 @@ int main (int argc, char** argv){
     int a=9;
     int b=5;
 
+    int f = 0xF + 0xF;
+
+    printf("\t\tResultado de octales= %d\n", f);
+
+/*
     int c = a+b;
     printf("\t\tResultado de 9+5= %d\n",c);
     //int c=0;
@@ -27,6 +32,8 @@ int main (int argc, char** argv){
 
     printf("\n\tAgregamos un nuevo commit");
     printf("\n\tPrueba 2.\n");
+
+*/
 
     return 0;
 }
