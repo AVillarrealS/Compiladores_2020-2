@@ -1,0 +1,173 @@
+Gramática
+
+    0 $accept: line $end
+
+    1 line: exp SL
+
+    2 exp: exp MAS term
+    3    | term
+
+    4 term: term MUL factor
+    5     | factor
+
+    6 factor: LPAR exp RPAR
+    7       | NUMERO
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+SL (258) 1
+NUMERO (259) 7
+MAS (260) 2
+MUL (261) 4
+RPAR (262) 6
+LPAR (263) 6
+
+
+No terminales con las reglas donde aparecen
+
+$accept (9)
+    en la izquierda: 0
+line (10)
+    en la izquierda: 1, en la derecha: 0
+exp (11)
+    en la izquierda: 2 3, en la derecha: 1 2 6
+term (12)
+    en la izquierda: 4 5, en la derecha: 2 3 4
+factor (13)
+    en la izquierda: 6 7, en la derecha: 4 5
+
+
+estado 0
+
+    0 $accept: . line $end
+
+    NUMERO  desplazar e ir al estado 1
+    LPAR    desplazar e ir al estado 2
+
+    line    ir al estado 3
+    exp     ir al estado 4
+    term    ir al estado 5
+    factor  ir al estado 6
+
+
+estado 1
+
+    7 factor: NUMERO .
+
+    $default  reduce usando la regla 7 (factor)
+
+
+estado 2
+
+    6 factor: LPAR . exp RPAR
+
+    NUMERO  desplazar e ir al estado 1
+    LPAR    desplazar e ir al estado 2
+
+    exp     ir al estado 7
+    term    ir al estado 5
+    factor  ir al estado 6
+
+
+estado 3
+
+    0 $accept: line . $end
+
+    $end  desplazar e ir al estado 8
+
+
+estado 4
+
+    1 line: exp . SL
+    2 exp: exp . MAS term
+
+    SL   desplazar e ir al estado 9
+    MAS  desplazar e ir al estado 10
+
+
+estado 5
+
+    3 exp: term .
+    4 term: term . MUL factor
+
+    MUL  desplazar e ir al estado 11
+
+    $default  reduce usando la regla 3 (exp)
+
+
+estado 6
+
+    5 term: factor .
+
+    $default  reduce usando la regla 5 (term)
+
+
+estado 7
+
+    2 exp: exp . MAS term
+    6 factor: LPAR exp . RPAR
+
+    MAS   desplazar e ir al estado 10
+    RPAR  desplazar e ir al estado 12
+
+
+estado 8
+
+    0 $accept: line $end .
+
+    $default  aceptar
+
+
+estado 9
+
+    1 line: exp SL .
+
+    $default  reduce usando la regla 1 (line)
+
+
+estado 10
+
+    2 exp: exp MAS . term
+
+    NUMERO  desplazar e ir al estado 1
+    LPAR    desplazar e ir al estado 2
+
+    term    ir al estado 13
+    factor  ir al estado 6
+
+
+estado 11
+
+    4 term: term MUL . factor
+
+    NUMERO  desplazar e ir al estado 1
+    LPAR    desplazar e ir al estado 2
+
+    factor  ir al estado 14
+
+
+estado 12
+
+    6 factor: LPAR exp RPAR .
+
+    $default  reduce usando la regla 6 (factor)
+
+
+estado 13
+
+    2 exp: exp MAS term .
+    4 term: term . MUL factor
+
+    MUL  desplazar e ir al estado 11
+
+    $default  reduce usando la regla 2 (exp)
+
+
+estado 14
+
+    4 term: term MUL factor .
+
+    $default  reduce usando la regla 4 (term)
