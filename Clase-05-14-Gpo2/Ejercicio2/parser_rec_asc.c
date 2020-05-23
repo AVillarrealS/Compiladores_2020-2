@@ -54,7 +54,7 @@ int type(){
 void list(int tipo){
     if(token == ID){
         token = yylex();
-        printf("El tipo es %d: \n", tipo);
+        printf("El tipo es: %d\n", tipo);
         listp(tipo);
     }else
         error();

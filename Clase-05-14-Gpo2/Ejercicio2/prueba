@@ -1,5 +1,5 @@
 int a, b;
-float f, g;
+int f, g;
 int x, y;
-float m;
+float m, n;
 int d;

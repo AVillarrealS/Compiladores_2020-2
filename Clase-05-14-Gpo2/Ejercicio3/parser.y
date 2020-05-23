@@ -1,11 +1,12 @@
 /*
-    L -> E\n {L.val = E.val}
-    E -> E1 + T {E.val = E1.val + T.val}
-         | T {E.val = T.val}
-    T -> T1 * F {T.val = T1.val * F.val}
-         | F {T.val = F.val}
-    F -> (E) {F.val = E.val}
-         | numero {F.val = numero.val}
+    S -> id = E ;
+    E -> E1 + T
+    E -> T
+    T -> T1 * F
+    T -> F
+    F -> (E)
+    F -> num
+    F -> id
 */
 
 /* SECCIÓN DE DECLARACIONES */
@@ -13,6 +14,8 @@
     #include <stdio.h>
     extern int yylex();
     void yyerror(char *s);
+    char *newTemp();
+    int temp=0;
 %}
 
 %union{
@@ -22,6 +25,8 @@
 %token<dir> ID
 %token<dir> NUMERO
 /* %left, %right, %nonassoc */
+%token PYC
+%left ASIG
 %left MAS
 %left MUL
 %nonassoc LPAR RPAR
@@ -33,39 +38,32 @@
 
 %%
 /* SECCIÓN DEL ESQUEMA DE TRADUCCIÓN */
-/* L -> E\n {L.val = E.val} */
-/* $$  $1 $2       $3       */
-line : exp SL { $$ = $1; 
-                printf("El valor de la operacion es: %d\n", $$);
-              };
+sentencia : ID ASIG exp PYC;
 
+exp : exp MAS term {
+        strcpy($$, newTemp());
+        printf("%s = %s + %s\n", $$, $1, $3);
+    }
+    | term { $$ = $1; };
 
-/* E -> E1 + T {E.val = E1.val + T.val}
-         | T {E.val = T.val} */
-/* $$  $1 $2 $3        $4            */
-/*        $1         $2              */ //Reinicia contandor
-exp : exp MAS term { $$ = $1 + $3; }
-      | term { $$ = $1; };
+term : term MUL factor {
+        strcpy($$, newTemp());
+        printf("%s = %s + %s\n", $$, $1, $3);
+    }
+    | factor { $$ = $1; };
 
-
-/* T -> T1 * F {T.val = T1.val * F.val}
-         | F {T.val = F.val} */
-/* $$  $1 $2 $3        $4             */
-/*         $1        $2               */
-term : term MUL factor { $$ = $1 * $3; }
-       | factor { $$ = $1; };
-
-
-/* F -> (E) {F.val = E.val}
-         | numero {F.val = numero.val} */
-/* $$  $1 $2 $3    $4                  */
-/*            $1         $2            */
 factor : LPAR exp RPAR { $$ = $2; }
-         | NUMERO { $$ = $1; };
-
+    | NUMERO { $$ = $1; }
+    | ID { $$ = $1; };
 
 %%
 /* SECCIÓN DE CÓDIGO DE USUARIO */
 void yyerror(char *s){
     printf("%s\n", s);
+}
+
+char *newTemp(){
+    char strtemp[32];
+    sprintf(strtemp,"t%d",temp++);
+    return strtemp;
 }
