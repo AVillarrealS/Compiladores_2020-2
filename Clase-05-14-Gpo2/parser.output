@@ -1,0 +1,136 @@
+Gramática
+
+    0 $accept: decl $end
+
+    1 $@1: /* vacío */
+
+    2 decl: decl type $@1 list PYC
+    3     | /* vacío */
+
+    4 type: INT
+    5     | FLOAT
+
+    6 list: list COMA ID
+    7     | ID
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+COMA (258) 6
+PYC (259) 2
+ID (260) 6 7
+INT (261) 4
+FLOAT (262) 5
+
+
+No terminales con las reglas donde aparecen
+
+$accept (8)
+    en la izquierda: 0
+decl (9)
+    en la izquierda: 2 3, en la derecha: 0 2
+$@1 (10)
+    en la izquierda: 1, en la derecha: 2
+type (11)
+    en la izquierda: 4 5, en la derecha: 2
+list (12)
+    en la izquierda: 6 7, en la derecha: 2 6
+
+
+estado 0
+
+    0 $accept: . decl $end
+
+    $default  reduce usando la regla 3 (decl)
+
+    decl  ir al estado 1
+
+
+estado 1
+
+    0 $accept: decl . $end
+    2 decl: decl . type $@1 list PYC
+
+    $end   desplazar e ir al estado 2
+    INT    desplazar e ir al estado 3
+    FLOAT  desplazar e ir al estado 4
+
+    type  ir al estado 5
+
+
+estado 2
+
+    0 $accept: decl $end .
+
+    $default  aceptar
+
+
+estado 3
+
+    4 type: INT .
+
+    $default  reduce usando la regla 4 (type)
+
+
+estado 4
+
+    5 type: FLOAT .
+
+    $default  reduce usando la regla 5 (type)
+
+
+estado 5
+
+    2 decl: decl type . $@1 list PYC
+
+    $default  reduce usando la regla 1 ($@1)
+
+    $@1  ir al estado 6
+
+
+estado 6
+
+    2 decl: decl type $@1 . list PYC
+
+    ID  desplazar e ir al estado 7
+
+    list  ir al estado 8
+
+
+estado 7
+
+    7 list: ID .
+
+    $default  reduce usando la regla 7 (list)
+
+
+estado 8
+
+    2 decl: decl type $@1 list . PYC
+    6 list: list . COMA ID
+
+    COMA  desplazar e ir al estado 9
+    PYC   desplazar e ir al estado 10
+
+
+estado 9
+
+    6 list: list COMA . ID
+
+    ID  desplazar e ir al estado 11
+
+
+estado 10
+
+    2 decl: decl type $@1 list PYC .
+
+    $default  reduce usando la regla 2 (decl)
+
+
+estado 11
+
+    6 list: list COMA ID .
+
+    $default  reduce usando la regla 6 (list)
