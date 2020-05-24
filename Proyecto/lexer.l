@@ -1,6 +1,7 @@
 
 %{
     #include <stdio.h>
+    #include <stdlib.h>
 %}
 
 %option noyywrap
@@ -27,7 +28,9 @@ com [^*/]
 [ \t\n\r]+ {/*ignorar espacios en blanco*/}
 .   { printf("Error Lexico: %s\n", yytext);}
 %%
+//Vacío por ahora...
 
-int main(){
-    yylex();
-}
+//int yywrap(){
+//    return 1;
+//};
+

@@ -404,7 +404,8 @@ char *yytext;
 #define INITIAL 0
 #line 3 "lexer.l"
     #include <stdio.h>
-#line 408 "lex.yy.c"
+    #include <stdlib.h>
+#line 409 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -555,9 +556,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 16 "lexer.l"
+#line 17 "lexer.l"
 
-#line 561 "lex.yy.c"
+#line 562 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -642,70 +643,70 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "lexer.l"
+#line 18 "lexer.l"
 {printf("Encontre un identificador: %s \n", yytext);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "lexer.l"
+#line 19 "lexer.l"
 {printf("Encontre una palabra reservada: %s \n", yytext);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "lexer.l"
+#line 20 "lexer.l"
 {printf("Encontre una palabra reservada: %s \n", yytext);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "lexer.l"
+#line 21 "lexer.l"
 {printf("Encontre una palabra reservada: %s \n", yytext);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "lexer.l"
+#line 22 "lexer.l"
 {printf("Encontre un(os) operador(es) (aritmeticos): %s \n", yytext);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "lexer.l"
+#line 23 "lexer.l"
 {printf("Encontre un(os) operador(es) (relacionales): %s \n", yytext);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "lexer.l"
+#line 24 "lexer.l"
 {printf("Encontre un(os) operador(es) (logico): %s \n", yytext);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "lexer.l"
+#line 25 "lexer.l"
 {printf("Encontre un(os) simbolo(s) de puntuacion: %s \n", yytext);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "lexer.l"
+#line 26 "lexer.l"
 {printf("Encontre un(os) operador(es) (asignacion): %s \n", yytext);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "lexer.l"
+#line 27 "lexer.l"
 {/*ignorar comentarios*/}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "lexer.l"
+#line 28 "lexer.l"
 {/*ignorar espacios en blanco*/}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "lexer.l"
+#line 29 "lexer.l"
 { printf("Error Lexico: %s\n", yytext);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "lexer.l"
+#line 30 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 709 "lex.yy.c"
+#line 710 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1591,9 +1592,11 @@ int main()
 	return 0;
 	}
 #endif
-#line 29 "lexer.l"
+#line 30 "lexer.l"
 
+//Vacío por ahora...
 
-int main(){
-    yylex();
-}
+//int yywrap(){
+//    return 1;
+//};
+
