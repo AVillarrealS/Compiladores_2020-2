@@ -1,7 +1,7 @@
 #include <stdio.h>
 
+extern int yyparse();
 extern FILE *yyin;
-extern int yylex();
 
 int main(int argc, char** argv){
     FILE *f;
@@ -17,6 +17,6 @@ int main(int argc, char** argv){
     }
 
     yyin = f;
-    yylex();
+    yyparse();
     fclose(yyin);
 }

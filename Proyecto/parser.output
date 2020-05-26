@@ -1,0 +1,2081 @@
+Terminals unused in grammar
+
+   RCOR
+   LCOR
+
+
+Estado 114 conflictos: 1 desplazamiento(s)/reducción(ones)
+
+
+Gramática
+
+    0 $accept: programa $end
+
+    1 programa: declaraciones funciones
+
+    2 declaraciones: tipo lista_var PYC declaraciones
+    3              | tipo_registro lista_var PYC declaraciones
+    4              | /* vacío */
+
+    5 tipo_registro: PRESTRUCTURA PRINICIO declaraciones PRFIN
+
+    6 tipo: base tipo_arreglo
+
+    7 base: PRENTERO
+    8     | PRREAL
+    9     | PRDREAL
+   10     | PRCAR
+   11     | PRSIN
+
+   12 tipo_arreglo: LPAR NUM RPAR tipo_arreglo
+   13             | /* vacío */
+
+   14 lista_var: lista_var COMA ID
+   15          | ID
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones
+   17          | /* vacío */
+
+   18 argumentos: lista_arg
+   19           | PRSIN
+
+   20 lista_arg: lista_arg COMA arg
+   21          | arg
+
+   22 arg: tipo_arg ID
+
+   23 tipo_arg: base param_arr
+
+   24 param_arr: LPAR RPAR param_arr
+   25          | /* vacío */
+
+   26 sentencias: sentencias sentencia
+   27           | sentencia
+
+   28 sentencia: PRSI e_bool PRENTONCES sentencia PRFIN
+   29          | PRSI e_bool PRENTONCES sentencia PRSINO sentencia PRFIN
+   30          | PRMIENTRAS e_bool PRHACER sentencia PRFIN
+   31          | PRHACER sentencia PRMIENTRAS e_bool PYC
+   32          | PRSEGUN LPAR variable RPAR PRHACER casos predeterminado PRFIN
+   33          | variable PIGUAL expresion PYC
+   34          | PRESCRIBIR expresion PYC
+   35          | PRLEER variable PYC
+   36          | PRDEVOLVER PYC
+   37          | PRDEVOLVER expresion PYC
+   38          | PRTERMINAR PYC
+   39          | PRINICIO sentencias PRFIN
+
+   40 casos: PRCASO NUM DP sentencia casos
+   41      | PRCASO NUM DP sentencia
+
+   42 predeterminado: PRPRED DP sentencia
+   43               | /* vacío */
+
+   44 e_bool: e_bool PROR e_bool
+   45       | e_bool PRAND e_bool
+   46       | PRNOT e_bool
+   47       | relacional
+   48       | PRVERDADERO
+   49       | PRFALSO
+
+   50 relacional: relacional MAYOR relacional
+   51           | relacional MENOR relacional
+   52           | relacional MENORIGUAL relacional
+   53           | relacional MAYORIGUAL relacional
+   54           | relacional MAYORMENOR relacional
+   55           | relacional IGUAL relacional
+   56           | expresion
+
+   57 expresion: expresion SUMA expresion
+   58          | expresion RESTA expresion
+   59          | expresion MUL expresion
+   60          | expresion DIV expresion
+   61          | expresion MOD expresion
+   62          | LPAR expresion RPAR
+   63          | variable
+   64          | NUM
+   65          | CADENA
+   66          | CARACTER
+
+   67 variable: ID variable_comp
+
+   68 variable_comp: dato_est_sim
+   69              | arreglo
+   70              | LPAR parametros RPAR
+
+   71 dato_est_sim: dato_est_sim PUNTO ID
+   72             | /* vacío */
+
+   73 arreglo: LPAR expresion RPAR
+   74        | arreglo LPAR expresion RPAR
+
+   75 parametros: lista_param
+   76           | /* vacío */
+
+   77 lista_param: lista_param COMA expresion
+   78            | expresion
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+error (256)
+PRESTRUCTURA (258) 5
+PRINICIO (259) 5 16 39
+PRDEF (260) 16
+PRFIN (261) 5 16 28 29 30 32 39
+PRENTERO (262) 7
+PRREAL (263) 8
+PRCAR (264) 10
+PRDREAL (265) 9
+PRSIN (266) 11 19
+PRSI (267) 28 29
+PRENTONCES (268) 28 29
+PRSINO (269) 29
+PRMIENTRAS (270) 30 31
+PRHACER (271) 30 31 32
+PRSEGUN (272) 32
+PRESCRIBIR (273) 34
+PRLEER (274) 35
+PRDEVOLVER (275) 36 37
+PRTERMINAR (276) 38
+PRCASO (277) 40 41
+PRPRED (278) 42
+PRVERDADERO (279) 48
+PRFALSO (280) 49
+COMA (281) 14 20 77
+PYC (282) 2 3 31 33 34 35 36 37 38
+DP (283) 40 41 42
+PIGUAL (284) 33
+NUM (285) 12 40 41 64
+ID (286) 14 15 16 22 67 71
+CARACTER (287) 66
+CADENA (288) 65
+IGUAL (289) 55
+PROR (290) 44
+PRAND (291) 45
+PRNOT (292) 46
+MAYORMENOR (293) 54
+MENORIGUAL (294) 52
+MAYORIGUAL (295) 53
+MENOR (296) 51
+MAYOR (297) 50
+RESTA (298) 58
+SUMA (299) 57
+MOD (300) 61
+DIV (301) 60
+MUL (302) 59
+PUNTO (303) 71
+RCOR (304)
+LCOR (305)
+RPAR (306) 12 16 24 32 62 70 73 74
+LPAR (307) 12 16 24 32 62 70 73 74
+
+
+No terminales con las reglas donde aparecen
+
+$accept (53)
+    en la izquierda: 0
+programa (54)
+    en la izquierda: 1, en la derecha: 0
+declaraciones (55)
+    en la izquierda: 2 3 4, en la derecha: 1 2 3 5 16
+tipo_registro (56)
+    en la izquierda: 5, en la derecha: 3
+tipo (57)
+    en la izquierda: 6, en la derecha: 2 16
+base (58)
+    en la izquierda: 7 8 9 10 11, en la derecha: 6 23
+tipo_arreglo (59)
+    en la izquierda: 12 13, en la derecha: 6 12
+lista_var (60)
+    en la izquierda: 14 15, en la derecha: 2 3 14
+funciones (61)
+    en la izquierda: 16 17, en la derecha: 1 16
+argumentos (62)
+    en la izquierda: 18 19, en la derecha: 16
+lista_arg (63)
+    en la izquierda: 20 21, en la derecha: 18 20
+arg (64)
+    en la izquierda: 22, en la derecha: 20 21
+tipo_arg (65)
+    en la izquierda: 23, en la derecha: 22
+param_arr (66)
+    en la izquierda: 24 25, en la derecha: 23 24
+sentencias (67)
+    en la izquierda: 26 27, en la derecha: 16 26 39
+sentencia (68)
+    en la izquierda: 28 29 30 31 32 33 34 35 36 37 38 39, en la derecha:
+    26 27 28 29 30 31 40 41 42
+casos (69)
+    en la izquierda: 40 41, en la derecha: 32 40
+predeterminado (70)
+    en la izquierda: 42 43, en la derecha: 32
+e_bool (71)
+    en la izquierda: 44 45 46 47 48 49, en la derecha: 28 29 30 31
+    44 45 46
+relacional (72)
+    en la izquierda: 50 51 52 53 54 55 56, en la derecha: 47 50 51
+    52 53 54 55
+expresion (73)
+    en la izquierda: 57 58 59 60 61 62 63 64 65 66, en la derecha:
+    33 34 37 56 57 58 59 60 61 62 73 74 77 78
+variable (74)
+    en la izquierda: 67, en la derecha: 32 33 35 63
+variable_comp (75)
+    en la izquierda: 68 69 70, en la derecha: 67
+dato_est_sim (76)
+    en la izquierda: 71 72, en la derecha: 68 71
+arreglo (77)
+    en la izquierda: 73 74, en la derecha: 69 74
+parametros (78)
+    en la izquierda: 75 76, en la derecha: 70
+lista_param (79)
+    en la izquierda: 77 78, en la derecha: 75 77
+
+
+estado 0
+
+    0 $accept: . programa $end
+
+    PRESTRUCTURA  desplazar e ir al estado 1
+    PRENTERO      desplazar e ir al estado 2
+    PRREAL        desplazar e ir al estado 3
+    PRCAR         desplazar e ir al estado 4
+    PRDREAL       desplazar e ir al estado 5
+    PRSIN         desplazar e ir al estado 6
+
+    $default  reduce usando la regla 4 (declaraciones)
+
+    programa       ir al estado 7
+    declaraciones  ir al estado 8
+    tipo_registro  ir al estado 9
+    tipo           ir al estado 10
+    base           ir al estado 11
+
+
+estado 1
+
+    5 tipo_registro: PRESTRUCTURA . PRINICIO declaraciones PRFIN
+
+    PRINICIO  desplazar e ir al estado 12
+
+
+estado 2
+
+    7 base: PRENTERO .
+
+    $default  reduce usando la regla 7 (base)
+
+
+estado 3
+
+    8 base: PRREAL .
+
+    $default  reduce usando la regla 8 (base)
+
+
+estado 4
+
+   10 base: PRCAR .
+
+    $default  reduce usando la regla 10 (base)
+
+
+estado 5
+
+    9 base: PRDREAL .
+
+    $default  reduce usando la regla 9 (base)
+
+
+estado 6
+
+   11 base: PRSIN .
+
+    $default  reduce usando la regla 11 (base)
+
+
+estado 7
+
+    0 $accept: programa . $end
+
+    $end  desplazar e ir al estado 13
+
+
+estado 8
+
+    1 programa: declaraciones . funciones
+
+    PRDEF  desplazar e ir al estado 14
+
+    $default  reduce usando la regla 17 (funciones)
+
+    funciones  ir al estado 15
+
+
+estado 9
+
+    3 declaraciones: tipo_registro . lista_var PYC declaraciones
+
+    ID  desplazar e ir al estado 16
+
+    lista_var  ir al estado 17
+
+
+estado 10
+
+    2 declaraciones: tipo . lista_var PYC declaraciones
+
+    ID  desplazar e ir al estado 16
+
+    lista_var  ir al estado 18
+
+
+estado 11
+
+    6 tipo: base . tipo_arreglo
+
+    LPAR  desplazar e ir al estado 19
+
+    $default  reduce usando la regla 13 (tipo_arreglo)
+
+    tipo_arreglo  ir al estado 20
+
+
+estado 12
+
+    5 tipo_registro: PRESTRUCTURA PRINICIO . declaraciones PRFIN
+
+    PRESTRUCTURA  desplazar e ir al estado 1
+    PRENTERO      desplazar e ir al estado 2
+    PRREAL        desplazar e ir al estado 3
+    PRCAR         desplazar e ir al estado 4
+    PRDREAL       desplazar e ir al estado 5
+    PRSIN         desplazar e ir al estado 6
+
+    $default  reduce usando la regla 4 (declaraciones)
+
+    declaraciones  ir al estado 21
+    tipo_registro  ir al estado 9
+    tipo           ir al estado 10
+    base           ir al estado 11
+
+
+estado 13
+
+    0 $accept: programa $end .
+
+    $default  aceptar
+
+
+estado 14
+
+   16 funciones: PRDEF . tipo ID LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones
+
+    PRENTERO  desplazar e ir al estado 2
+    PRREAL    desplazar e ir al estado 3
+    PRCAR     desplazar e ir al estado 4
+    PRDREAL   desplazar e ir al estado 5
+    PRSIN     desplazar e ir al estado 6
+
+    tipo  ir al estado 22
+    base  ir al estado 11
+
+
+estado 15
+
+    1 programa: declaraciones funciones .
+
+    $default  reduce usando la regla 1 (programa)
+
+
+estado 16
+
+   15 lista_var: ID .
+
+    $default  reduce usando la regla 15 (lista_var)
+
+
+estado 17
+
+    3 declaraciones: tipo_registro lista_var . PYC declaraciones
+   14 lista_var: lista_var . COMA ID
+
+    COMA  desplazar e ir al estado 23
+    PYC   desplazar e ir al estado 24
+
+
+estado 18
+
+    2 declaraciones: tipo lista_var . PYC declaraciones
+   14 lista_var: lista_var . COMA ID
+
+    COMA  desplazar e ir al estado 23
+    PYC   desplazar e ir al estado 25
+
+
+estado 19
+
+   12 tipo_arreglo: LPAR . NUM RPAR tipo_arreglo
+
+    NUM  desplazar e ir al estado 26
+
+
+estado 20
+
+    6 tipo: base tipo_arreglo .
+
+    $default  reduce usando la regla 6 (tipo)
+
+
+estado 21
+
+    5 tipo_registro: PRESTRUCTURA PRINICIO declaraciones . PRFIN
+
+    PRFIN  desplazar e ir al estado 27
+
+
+estado 22
+
+   16 funciones: PRDEF tipo . ID LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones
+
+    ID  desplazar e ir al estado 28
+
+
+estado 23
+
+   14 lista_var: lista_var COMA . ID
+
+    ID  desplazar e ir al estado 29
+
+
+estado 24
+
+    3 declaraciones: tipo_registro lista_var PYC . declaraciones
+
+    PRESTRUCTURA  desplazar e ir al estado 1
+    PRENTERO      desplazar e ir al estado 2
+    PRREAL        desplazar e ir al estado 3
+    PRCAR         desplazar e ir al estado 4
+    PRDREAL       desplazar e ir al estado 5
+    PRSIN         desplazar e ir al estado 6
+
+    $default  reduce usando la regla 4 (declaraciones)
+
+    declaraciones  ir al estado 30
+    tipo_registro  ir al estado 9
+    tipo           ir al estado 10
+    base           ir al estado 11
+
+
+estado 25
+
+    2 declaraciones: tipo lista_var PYC . declaraciones
+
+    PRESTRUCTURA  desplazar e ir al estado 1
+    PRENTERO      desplazar e ir al estado 2
+    PRREAL        desplazar e ir al estado 3
+    PRCAR         desplazar e ir al estado 4
+    PRDREAL       desplazar e ir al estado 5
+    PRSIN         desplazar e ir al estado 6
+
+    $default  reduce usando la regla 4 (declaraciones)
+
+    declaraciones  ir al estado 31
+    tipo_registro  ir al estado 9
+    tipo           ir al estado 10
+    base           ir al estado 11
+
+
+estado 26
+
+   12 tipo_arreglo: LPAR NUM . RPAR tipo_arreglo
+
+    RPAR  desplazar e ir al estado 32
+
+
+estado 27
+
+    5 tipo_registro: PRESTRUCTURA PRINICIO declaraciones PRFIN .
+
+    $default  reduce usando la regla 5 (tipo_registro)
+
+
+estado 28
+
+   16 funciones: PRDEF tipo ID . LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones
+
+    LPAR  desplazar e ir al estado 33
+
+
+estado 29
+
+   14 lista_var: lista_var COMA ID .
+
+    $default  reduce usando la regla 14 (lista_var)
+
+
+estado 30
+
+    3 declaraciones: tipo_registro lista_var PYC declaraciones .
+
+    $default  reduce usando la regla 3 (declaraciones)
+
+
+estado 31
+
+    2 declaraciones: tipo lista_var PYC declaraciones .
+
+    $default  reduce usando la regla 2 (declaraciones)
+
+
+estado 32
+
+   12 tipo_arreglo: LPAR NUM RPAR . tipo_arreglo
+
+    LPAR  desplazar e ir al estado 19
+
+    $default  reduce usando la regla 13 (tipo_arreglo)
+
+    tipo_arreglo  ir al estado 34
+
+
+estado 33
+
+   16 funciones: PRDEF tipo ID LPAR . argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones
+
+    PRENTERO  desplazar e ir al estado 2
+    PRREAL    desplazar e ir al estado 3
+    PRCAR     desplazar e ir al estado 4
+    PRDREAL   desplazar e ir al estado 5
+    PRSIN     desplazar e ir al estado 35
+
+    base        ir al estado 36
+    argumentos  ir al estado 37
+    lista_arg   ir al estado 38
+    arg         ir al estado 39
+    tipo_arg    ir al estado 40
+
+
+estado 34
+
+   12 tipo_arreglo: LPAR NUM RPAR tipo_arreglo .
+
+    $default  reduce usando la regla 12 (tipo_arreglo)
+
+
+estado 35
+
+   11 base: PRSIN .
+   19 argumentos: PRSIN .
+
+    RPAR      reduce usando la regla 19 (argumentos)
+    $default  reduce usando la regla 11 (base)
+
+
+estado 36
+
+   23 tipo_arg: base . param_arr
+
+    LPAR  desplazar e ir al estado 41
+
+    $default  reduce usando la regla 25 (param_arr)
+
+    param_arr  ir al estado 42
+
+
+estado 37
+
+   16 funciones: PRDEF tipo ID LPAR argumentos . RPAR PRINICIO declaraciones sentencias PRFIN funciones
+
+    RPAR  desplazar e ir al estado 43
+
+
+estado 38
+
+   18 argumentos: lista_arg .
+   20 lista_arg: lista_arg . COMA arg
+
+    COMA  desplazar e ir al estado 44
+
+    $default  reduce usando la regla 18 (argumentos)
+
+
+estado 39
+
+   21 lista_arg: arg .
+
+    $default  reduce usando la regla 21 (lista_arg)
+
+
+estado 40
+
+   22 arg: tipo_arg . ID
+
+    ID  desplazar e ir al estado 45
+
+
+estado 41
+
+   24 param_arr: LPAR . RPAR param_arr
+
+    RPAR  desplazar e ir al estado 46
+
+
+estado 42
+
+   23 tipo_arg: base param_arr .
+
+    $default  reduce usando la regla 23 (tipo_arg)
+
+
+estado 43
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR . PRINICIO declaraciones sentencias PRFIN funciones
+
+    PRINICIO  desplazar e ir al estado 47
+
+
+estado 44
+
+   20 lista_arg: lista_arg COMA . arg
+
+    PRENTERO  desplazar e ir al estado 2
+    PRREAL    desplazar e ir al estado 3
+    PRCAR     desplazar e ir al estado 4
+    PRDREAL   desplazar e ir al estado 5
+    PRSIN     desplazar e ir al estado 6
+
+    base      ir al estado 36
+    arg       ir al estado 48
+    tipo_arg  ir al estado 40
+
+
+estado 45
+
+   22 arg: tipo_arg ID .
+
+    $default  reduce usando la regla 22 (arg)
+
+
+estado 46
+
+   24 param_arr: LPAR RPAR . param_arr
+
+    LPAR  desplazar e ir al estado 41
+
+    $default  reduce usando la regla 25 (param_arr)
+
+    param_arr  ir al estado 49
+
+
+estado 47
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR PRINICIO . declaraciones sentencias PRFIN funciones
+
+    PRESTRUCTURA  desplazar e ir al estado 1
+    PRENTERO      desplazar e ir al estado 2
+    PRREAL        desplazar e ir al estado 3
+    PRCAR         desplazar e ir al estado 4
+    PRDREAL       desplazar e ir al estado 5
+    PRSIN         desplazar e ir al estado 6
+
+    $default  reduce usando la regla 4 (declaraciones)
+
+    declaraciones  ir al estado 50
+    tipo_registro  ir al estado 9
+    tipo           ir al estado 10
+    base           ir al estado 11
+
+
+estado 48
+
+   20 lista_arg: lista_arg COMA arg .
+
+    $default  reduce usando la regla 20 (lista_arg)
+
+
+estado 49
+
+   24 param_arr: LPAR RPAR param_arr .
+
+    $default  reduce usando la regla 24 (param_arr)
+
+
+estado 50
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR PRINICIO declaraciones . sentencias PRFIN funciones
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencias  ir al estado 61
+    sentencia   ir al estado 62
+    variable    ir al estado 63
+
+
+estado 51
+
+   39 sentencia: PRINICIO . sentencias PRFIN
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencias  ir al estado 64
+    sentencia   ir al estado 62
+    variable    ir al estado 63
+
+
+estado 52
+
+   28 sentencia: PRSI . e_bool PRENTONCES sentencia PRFIN
+   29          | PRSI . e_bool PRENTONCES sentencia PRSINO sentencia PRFIN
+
+    PRVERDADERO  desplazar e ir al estado 65
+    PRFALSO      desplazar e ir al estado 66
+    NUM          desplazar e ir al estado 67
+    ID           desplazar e ir al estado 60
+    CARACTER     desplazar e ir al estado 68
+    CADENA       desplazar e ir al estado 69
+    PRNOT        desplazar e ir al estado 70
+    LPAR         desplazar e ir al estado 71
+
+    e_bool      ir al estado 72
+    relacional  ir al estado 73
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 53
+
+   30 sentencia: PRMIENTRAS . e_bool PRHACER sentencia PRFIN
+
+    PRVERDADERO  desplazar e ir al estado 65
+    PRFALSO      desplazar e ir al estado 66
+    NUM          desplazar e ir al estado 67
+    ID           desplazar e ir al estado 60
+    CARACTER     desplazar e ir al estado 68
+    CADENA       desplazar e ir al estado 69
+    PRNOT        desplazar e ir al estado 70
+    LPAR         desplazar e ir al estado 71
+
+    e_bool      ir al estado 76
+    relacional  ir al estado 73
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 54
+
+   31 sentencia: PRHACER . sentencia PRMIENTRAS e_bool PYC
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 77
+    variable   ir al estado 63
+
+
+estado 55
+
+   32 sentencia: PRSEGUN . LPAR variable RPAR PRHACER casos predeterminado PRFIN
+
+    LPAR  desplazar e ir al estado 78
+
+
+estado 56
+
+   34 sentencia: PRESCRIBIR . expresion PYC
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 79
+    variable   ir al estado 75
+
+
+estado 57
+
+   35 sentencia: PRLEER . variable PYC
+
+    ID  desplazar e ir al estado 60
+
+    variable  ir al estado 80
+
+
+estado 58
+
+   36 sentencia: PRDEVOLVER . PYC
+   37          | PRDEVOLVER . expresion PYC
+
+    PYC       desplazar e ir al estado 81
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 82
+    variable   ir al estado 75
+
+
+estado 59
+
+   38 sentencia: PRTERMINAR . PYC
+
+    PYC  desplazar e ir al estado 83
+
+
+estado 60
+
+   67 variable: ID . variable_comp
+
+    LPAR  desplazar e ir al estado 84
+
+    $default  reduce usando la regla 72 (dato_est_sim)
+
+    variable_comp  ir al estado 85
+    dato_est_sim   ir al estado 86
+    arreglo        ir al estado 87
+
+
+estado 61
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR PRINICIO declaraciones sentencias . PRFIN funciones
+   26 sentencias: sentencias . sentencia
+
+    PRINICIO    desplazar e ir al estado 51
+    PRFIN       desplazar e ir al estado 88
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 89
+    variable   ir al estado 63
+
+
+estado 62
+
+   27 sentencias: sentencia .
+
+    $default  reduce usando la regla 27 (sentencias)
+
+
+estado 63
+
+   33 sentencia: variable . PIGUAL expresion PYC
+
+    PIGUAL  desplazar e ir al estado 90
+
+
+estado 64
+
+   26 sentencias: sentencias . sentencia
+   39 sentencia: PRINICIO sentencias . PRFIN
+
+    PRINICIO    desplazar e ir al estado 51
+    PRFIN       desplazar e ir al estado 91
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 89
+    variable   ir al estado 63
+
+
+estado 65
+
+   48 e_bool: PRVERDADERO .
+
+    $default  reduce usando la regla 48 (e_bool)
+
+
+estado 66
+
+   49 e_bool: PRFALSO .
+
+    $default  reduce usando la regla 49 (e_bool)
+
+
+estado 67
+
+   64 expresion: NUM .
+
+    $default  reduce usando la regla 64 (expresion)
+
+
+estado 68
+
+   66 expresion: CARACTER .
+
+    $default  reduce usando la regla 66 (expresion)
+
+
+estado 69
+
+   65 expresion: CADENA .
+
+    $default  reduce usando la regla 65 (expresion)
+
+
+estado 70
+
+   46 e_bool: PRNOT . e_bool
+
+    PRVERDADERO  desplazar e ir al estado 65
+    PRFALSO      desplazar e ir al estado 66
+    NUM          desplazar e ir al estado 67
+    ID           desplazar e ir al estado 60
+    CARACTER     desplazar e ir al estado 68
+    CADENA       desplazar e ir al estado 69
+    PRNOT        desplazar e ir al estado 70
+    LPAR         desplazar e ir al estado 71
+
+    e_bool      ir al estado 92
+    relacional  ir al estado 73
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 71
+
+   62 expresion: LPAR . expresion RPAR
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 93
+    variable   ir al estado 75
+
+
+estado 72
+
+   28 sentencia: PRSI e_bool . PRENTONCES sentencia PRFIN
+   29          | PRSI e_bool . PRENTONCES sentencia PRSINO sentencia PRFIN
+   44 e_bool: e_bool . PROR e_bool
+   45       | e_bool . PRAND e_bool
+
+    PRENTONCES  desplazar e ir al estado 94
+    PROR        desplazar e ir al estado 95
+    PRAND       desplazar e ir al estado 96
+
+
+estado 73
+
+   47 e_bool: relacional .
+   50 relacional: relacional . MAYOR relacional
+   51           | relacional . MENOR relacional
+   52           | relacional . MENORIGUAL relacional
+   53           | relacional . MAYORIGUAL relacional
+   54           | relacional . MAYORMENOR relacional
+   55           | relacional . IGUAL relacional
+
+    IGUAL       desplazar e ir al estado 97
+    MAYORMENOR  desplazar e ir al estado 98
+    MENORIGUAL  desplazar e ir al estado 99
+    MAYORIGUAL  desplazar e ir al estado 100
+    MENOR       desplazar e ir al estado 101
+    MAYOR       desplazar e ir al estado 102
+
+    $default  reduce usando la regla 47 (e_bool)
+
+
+estado 74
+
+   56 relacional: expresion .
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+
+    $default  reduce usando la regla 56 (relacional)
+
+
+estado 75
+
+   63 expresion: variable .
+
+    $default  reduce usando la regla 63 (expresion)
+
+
+estado 76
+
+   30 sentencia: PRMIENTRAS e_bool . PRHACER sentencia PRFIN
+   44 e_bool: e_bool . PROR e_bool
+   45       | e_bool . PRAND e_bool
+
+    PRHACER  desplazar e ir al estado 108
+    PROR     desplazar e ir al estado 95
+    PRAND    desplazar e ir al estado 96
+
+
+estado 77
+
+   31 sentencia: PRHACER sentencia . PRMIENTRAS e_bool PYC
+
+    PRMIENTRAS  desplazar e ir al estado 109
+
+
+estado 78
+
+   32 sentencia: PRSEGUN LPAR . variable RPAR PRHACER casos predeterminado PRFIN
+
+    ID  desplazar e ir al estado 60
+
+    variable  ir al estado 110
+
+
+estado 79
+
+   34 sentencia: PRESCRIBIR expresion . PYC
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    PYC    desplazar e ir al estado 111
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+
+
+estado 80
+
+   35 sentencia: PRLEER variable . PYC
+
+    PYC  desplazar e ir al estado 112
+
+
+estado 81
+
+   36 sentencia: PRDEVOLVER PYC .
+
+    $default  reduce usando la regla 36 (sentencia)
+
+
+estado 82
+
+   37 sentencia: PRDEVOLVER expresion . PYC
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    PYC    desplazar e ir al estado 113
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+
+
+estado 83
+
+   38 sentencia: PRTERMINAR PYC .
+
+    $default  reduce usando la regla 38 (sentencia)
+
+
+estado 84
+
+   70 variable_comp: LPAR . parametros RPAR
+   73 arreglo: LPAR . expresion RPAR
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    $default  reduce usando la regla 76 (parametros)
+
+    expresion    ir al estado 114
+    variable     ir al estado 75
+    parametros   ir al estado 115
+    lista_param  ir al estado 116
+
+
+estado 85
+
+   67 variable: ID variable_comp .
+
+    $default  reduce usando la regla 67 (variable)
+
+
+estado 86
+
+   68 variable_comp: dato_est_sim .
+   71 dato_est_sim: dato_est_sim . PUNTO ID
+
+    PUNTO  desplazar e ir al estado 117
+
+    $default  reduce usando la regla 68 (variable_comp)
+
+
+estado 87
+
+   69 variable_comp: arreglo .
+   74 arreglo: arreglo . LPAR expresion RPAR
+
+    LPAR  desplazar e ir al estado 118
+
+    $default  reduce usando la regla 69 (variable_comp)
+
+
+estado 88
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN . funciones
+
+    PRDEF  desplazar e ir al estado 14
+
+    $default  reduce usando la regla 17 (funciones)
+
+    funciones  ir al estado 119
+
+
+estado 89
+
+   26 sentencias: sentencias sentencia .
+
+    $default  reduce usando la regla 26 (sentencias)
+
+
+estado 90
+
+   33 sentencia: variable PIGUAL . expresion PYC
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 120
+    variable   ir al estado 75
+
+
+estado 91
+
+   39 sentencia: PRINICIO sentencias PRFIN .
+
+    $default  reduce usando la regla 39 (sentencia)
+
+
+estado 92
+
+   44 e_bool: e_bool . PROR e_bool
+   45       | e_bool . PRAND e_bool
+   46       | PRNOT e_bool .
+
+    $default  reduce usando la regla 46 (e_bool)
+
+
+estado 93
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+   62          | LPAR expresion . RPAR
+
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+    RPAR   desplazar e ir al estado 121
+
+
+estado 94
+
+   28 sentencia: PRSI e_bool PRENTONCES . sentencia PRFIN
+   29          | PRSI e_bool PRENTONCES . sentencia PRSINO sentencia PRFIN
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 122
+    variable   ir al estado 63
+
+
+estado 95
+
+   44 e_bool: e_bool PROR . e_bool
+
+    PRVERDADERO  desplazar e ir al estado 65
+    PRFALSO      desplazar e ir al estado 66
+    NUM          desplazar e ir al estado 67
+    ID           desplazar e ir al estado 60
+    CARACTER     desplazar e ir al estado 68
+    CADENA       desplazar e ir al estado 69
+    PRNOT        desplazar e ir al estado 70
+    LPAR         desplazar e ir al estado 71
+
+    e_bool      ir al estado 123
+    relacional  ir al estado 73
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 96
+
+   45 e_bool: e_bool PRAND . e_bool
+
+    PRVERDADERO  desplazar e ir al estado 65
+    PRFALSO      desplazar e ir al estado 66
+    NUM          desplazar e ir al estado 67
+    ID           desplazar e ir al estado 60
+    CARACTER     desplazar e ir al estado 68
+    CADENA       desplazar e ir al estado 69
+    PRNOT        desplazar e ir al estado 70
+    LPAR         desplazar e ir al estado 71
+
+    e_bool      ir al estado 124
+    relacional  ir al estado 73
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 97
+
+   55 relacional: relacional IGUAL . relacional
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    relacional  ir al estado 125
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 98
+
+   54 relacional: relacional MAYORMENOR . relacional
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    relacional  ir al estado 126
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 99
+
+   52 relacional: relacional MENORIGUAL . relacional
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    relacional  ir al estado 127
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 100
+
+   53 relacional: relacional MAYORIGUAL . relacional
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    relacional  ir al estado 128
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 101
+
+   51 relacional: relacional MENOR . relacional
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    relacional  ir al estado 129
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 102
+
+   50 relacional: relacional MAYOR . relacional
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    relacional  ir al estado 130
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 103
+
+   58 expresion: expresion RESTA . expresion
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 131
+    variable   ir al estado 75
+
+
+estado 104
+
+   57 expresion: expresion SUMA . expresion
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 132
+    variable   ir al estado 75
+
+
+estado 105
+
+   61 expresion: expresion MOD . expresion
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 133
+    variable   ir al estado 75
+
+
+estado 106
+
+   60 expresion: expresion DIV . expresion
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 134
+    variable   ir al estado 75
+
+
+estado 107
+
+   59 expresion: expresion MUL . expresion
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 135
+    variable   ir al estado 75
+
+
+estado 108
+
+   30 sentencia: PRMIENTRAS e_bool PRHACER . sentencia PRFIN
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 136
+    variable   ir al estado 63
+
+
+estado 109
+
+   31 sentencia: PRHACER sentencia PRMIENTRAS . e_bool PYC
+
+    PRVERDADERO  desplazar e ir al estado 65
+    PRFALSO      desplazar e ir al estado 66
+    NUM          desplazar e ir al estado 67
+    ID           desplazar e ir al estado 60
+    CARACTER     desplazar e ir al estado 68
+    CADENA       desplazar e ir al estado 69
+    PRNOT        desplazar e ir al estado 70
+    LPAR         desplazar e ir al estado 71
+
+    e_bool      ir al estado 137
+    relacional  ir al estado 73
+    expresion   ir al estado 74
+    variable    ir al estado 75
+
+
+estado 110
+
+   32 sentencia: PRSEGUN LPAR variable . RPAR PRHACER casos predeterminado PRFIN
+
+    RPAR  desplazar e ir al estado 138
+
+
+estado 111
+
+   34 sentencia: PRESCRIBIR expresion PYC .
+
+    $default  reduce usando la regla 34 (sentencia)
+
+
+estado 112
+
+   35 sentencia: PRLEER variable PYC .
+
+    $default  reduce usando la regla 35 (sentencia)
+
+
+estado 113
+
+   37 sentencia: PRDEVOLVER expresion PYC .
+
+    $default  reduce usando la regla 37 (sentencia)
+
+
+estado 114
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+   73 arreglo: LPAR expresion . RPAR
+   78 lista_param: expresion .
+
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+    RPAR   desplazar e ir al estado 139
+
+    RPAR      [reduce usando la regla 78 (lista_param)]
+    $default  reduce usando la regla 78 (lista_param)
+
+
+estado 115
+
+   70 variable_comp: LPAR parametros . RPAR
+
+    RPAR  desplazar e ir al estado 140
+
+
+estado 116
+
+   75 parametros: lista_param .
+   77 lista_param: lista_param . COMA expresion
+
+    COMA  desplazar e ir al estado 141
+
+    $default  reduce usando la regla 75 (parametros)
+
+
+estado 117
+
+   71 dato_est_sim: dato_est_sim PUNTO . ID
+
+    ID  desplazar e ir al estado 142
+
+
+estado 118
+
+   74 arreglo: arreglo LPAR . expresion RPAR
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 143
+    variable   ir al estado 75
+
+
+estado 119
+
+   16 funciones: PRDEF tipo ID LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones .
+
+    $default  reduce usando la regla 16 (funciones)
+
+
+estado 120
+
+   33 sentencia: variable PIGUAL expresion . PYC
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    PYC    desplazar e ir al estado 144
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+
+
+estado 121
+
+   62 expresion: LPAR expresion RPAR .
+
+    $default  reduce usando la regla 62 (expresion)
+
+
+estado 122
+
+   28 sentencia: PRSI e_bool PRENTONCES sentencia . PRFIN
+   29          | PRSI e_bool PRENTONCES sentencia . PRSINO sentencia PRFIN
+
+    PRFIN   desplazar e ir al estado 145
+    PRSINO  desplazar e ir al estado 146
+
+
+estado 123
+
+   44 e_bool: e_bool . PROR e_bool
+   44       | e_bool PROR e_bool .
+   45       | e_bool . PRAND e_bool
+
+    PRAND  desplazar e ir al estado 96
+
+    $default  reduce usando la regla 44 (e_bool)
+
+
+estado 124
+
+   44 e_bool: e_bool . PROR e_bool
+   45       | e_bool . PRAND e_bool
+   45       | e_bool PRAND e_bool .
+
+    $default  reduce usando la regla 45 (e_bool)
+
+
+estado 125
+
+   50 relacional: relacional . MAYOR relacional
+   51           | relacional . MENOR relacional
+   52           | relacional . MENORIGUAL relacional
+   53           | relacional . MAYORIGUAL relacional
+   54           | relacional . MAYORMENOR relacional
+   55           | relacional . IGUAL relacional
+   55           | relacional IGUAL relacional .
+
+    MAYORMENOR  desplazar e ir al estado 98
+    MENORIGUAL  desplazar e ir al estado 99
+    MAYORIGUAL  desplazar e ir al estado 100
+    MENOR       desplazar e ir al estado 101
+    MAYOR       desplazar e ir al estado 102
+
+    $default  reduce usando la regla 55 (relacional)
+
+
+estado 126
+
+   50 relacional: relacional . MAYOR relacional
+   51           | relacional . MENOR relacional
+   52           | relacional . MENORIGUAL relacional
+   53           | relacional . MAYORIGUAL relacional
+   54           | relacional . MAYORMENOR relacional
+   54           | relacional MAYORMENOR relacional .
+   55           | relacional . IGUAL relacional
+
+    $default  reduce usando la regla 54 (relacional)
+
+
+estado 127
+
+   50 relacional: relacional . MAYOR relacional
+   51           | relacional . MENOR relacional
+   52           | relacional . MENORIGUAL relacional
+   52           | relacional MENORIGUAL relacional .
+   53           | relacional . MAYORIGUAL relacional
+   54           | relacional . MAYORMENOR relacional
+   55           | relacional . IGUAL relacional
+
+    $default  reduce usando la regla 52 (relacional)
+
+
+estado 128
+
+   50 relacional: relacional . MAYOR relacional
+   51           | relacional . MENOR relacional
+   52           | relacional . MENORIGUAL relacional
+   53           | relacional . MAYORIGUAL relacional
+   53           | relacional MAYORIGUAL relacional .
+   54           | relacional . MAYORMENOR relacional
+   55           | relacional . IGUAL relacional
+
+    $default  reduce usando la regla 53 (relacional)
+
+
+estado 129
+
+   50 relacional: relacional . MAYOR relacional
+   51           | relacional . MENOR relacional
+   51           | relacional MENOR relacional .
+   52           | relacional . MENORIGUAL relacional
+   53           | relacional . MAYORIGUAL relacional
+   54           | relacional . MAYORMENOR relacional
+   55           | relacional . IGUAL relacional
+
+    $default  reduce usando la regla 51 (relacional)
+
+
+estado 130
+
+   50 relacional: relacional . MAYOR relacional
+   50           | relacional MAYOR relacional .
+   51           | relacional . MENOR relacional
+   52           | relacional . MENORIGUAL relacional
+   53           | relacional . MAYORIGUAL relacional
+   54           | relacional . MAYORMENOR relacional
+   55           | relacional . IGUAL relacional
+
+    $default  reduce usando la regla 50 (relacional)
+
+
+estado 131
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   58          | expresion RESTA expresion .
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    MOD  desplazar e ir al estado 105
+    DIV  desplazar e ir al estado 106
+    MUL  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 58 (expresion)
+
+
+estado 132
+
+   57 expresion: expresion . SUMA expresion
+   57          | expresion SUMA expresion .
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    MOD  desplazar e ir al estado 105
+    DIV  desplazar e ir al estado 106
+    MUL  desplazar e ir al estado 107
+
+    $default  reduce usando la regla 57 (expresion)
+
+
+estado 133
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+   61          | expresion MOD expresion .
+
+    $default  reduce usando la regla 61 (expresion)
+
+
+estado 134
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   60          | expresion DIV expresion .
+   61          | expresion . MOD expresion
+
+    $default  reduce usando la regla 60 (expresion)
+
+
+estado 135
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   59          | expresion MUL expresion .
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+
+    $default  reduce usando la regla 59 (expresion)
+
+
+estado 136
+
+   30 sentencia: PRMIENTRAS e_bool PRHACER sentencia . PRFIN
+
+    PRFIN  desplazar e ir al estado 147
+
+
+estado 137
+
+   31 sentencia: PRHACER sentencia PRMIENTRAS e_bool . PYC
+   44 e_bool: e_bool . PROR e_bool
+   45       | e_bool . PRAND e_bool
+
+    PYC    desplazar e ir al estado 148
+    PROR   desplazar e ir al estado 95
+    PRAND  desplazar e ir al estado 96
+
+
+estado 138
+
+   32 sentencia: PRSEGUN LPAR variable RPAR . PRHACER casos predeterminado PRFIN
+
+    PRHACER  desplazar e ir al estado 149
+
+
+estado 139
+
+   73 arreglo: LPAR expresion RPAR .
+
+    $default  reduce usando la regla 73 (arreglo)
+
+
+estado 140
+
+   70 variable_comp: LPAR parametros RPAR .
+
+    $default  reduce usando la regla 70 (variable_comp)
+
+
+estado 141
+
+   77 lista_param: lista_param COMA . expresion
+
+    NUM       desplazar e ir al estado 67
+    ID        desplazar e ir al estado 60
+    CARACTER  desplazar e ir al estado 68
+    CADENA    desplazar e ir al estado 69
+    LPAR      desplazar e ir al estado 71
+
+    expresion  ir al estado 150
+    variable   ir al estado 75
+
+
+estado 142
+
+   71 dato_est_sim: dato_est_sim PUNTO ID .
+
+    $default  reduce usando la regla 71 (dato_est_sim)
+
+
+estado 143
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+   74 arreglo: arreglo LPAR expresion . RPAR
+
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+    RPAR   desplazar e ir al estado 151
+
+
+estado 144
+
+   33 sentencia: variable PIGUAL expresion PYC .
+
+    $default  reduce usando la regla 33 (sentencia)
+
+
+estado 145
+
+   28 sentencia: PRSI e_bool PRENTONCES sentencia PRFIN .
+
+    $default  reduce usando la regla 28 (sentencia)
+
+
+estado 146
+
+   29 sentencia: PRSI e_bool PRENTONCES sentencia PRSINO . sentencia PRFIN
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 152
+    variable   ir al estado 63
+
+
+estado 147
+
+   30 sentencia: PRMIENTRAS e_bool PRHACER sentencia PRFIN .
+
+    $default  reduce usando la regla 30 (sentencia)
+
+
+estado 148
+
+   31 sentencia: PRHACER sentencia PRMIENTRAS e_bool PYC .
+
+    $default  reduce usando la regla 31 (sentencia)
+
+
+estado 149
+
+   32 sentencia: PRSEGUN LPAR variable RPAR PRHACER . casos predeterminado PRFIN
+
+    PRCASO  desplazar e ir al estado 153
+
+    casos  ir al estado 154
+
+
+estado 150
+
+   57 expresion: expresion . SUMA expresion
+   58          | expresion . RESTA expresion
+   59          | expresion . MUL expresion
+   60          | expresion . DIV expresion
+   61          | expresion . MOD expresion
+   77 lista_param: lista_param COMA expresion .
+
+    RESTA  desplazar e ir al estado 103
+    SUMA   desplazar e ir al estado 104
+    MOD    desplazar e ir al estado 105
+    DIV    desplazar e ir al estado 106
+    MUL    desplazar e ir al estado 107
+
+    $default  reduce usando la regla 77 (lista_param)
+
+
+estado 151
+
+   74 arreglo: arreglo LPAR expresion RPAR .
+
+    $default  reduce usando la regla 74 (arreglo)
+
+
+estado 152
+
+   29 sentencia: PRSI e_bool PRENTONCES sentencia PRSINO sentencia . PRFIN
+
+    PRFIN  desplazar e ir al estado 155
+
+
+estado 153
+
+   40 casos: PRCASO . NUM DP sentencia casos
+   41      | PRCASO . NUM DP sentencia
+
+    NUM  desplazar e ir al estado 156
+
+
+estado 154
+
+   32 sentencia: PRSEGUN LPAR variable RPAR PRHACER casos . predeterminado PRFIN
+
+    PRPRED  desplazar e ir al estado 157
+
+    $default  reduce usando la regla 43 (predeterminado)
+
+    predeterminado  ir al estado 158
+
+
+estado 155
+
+   29 sentencia: PRSI e_bool PRENTONCES sentencia PRSINO sentencia PRFIN .
+
+    $default  reduce usando la regla 29 (sentencia)
+
+
+estado 156
+
+   40 casos: PRCASO NUM . DP sentencia casos
+   41      | PRCASO NUM . DP sentencia
+
+    DP  desplazar e ir al estado 159
+
+
+estado 157
+
+   42 predeterminado: PRPRED . DP sentencia
+
+    DP  desplazar e ir al estado 160
+
+
+estado 158
+
+   32 sentencia: PRSEGUN LPAR variable RPAR PRHACER casos predeterminado . PRFIN
+
+    PRFIN  desplazar e ir al estado 161
+
+
+estado 159
+
+   40 casos: PRCASO NUM DP . sentencia casos
+   41      | PRCASO NUM DP . sentencia
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 162
+    variable   ir al estado 63
+
+
+estado 160
+
+   42 predeterminado: PRPRED DP . sentencia
+
+    PRINICIO    desplazar e ir al estado 51
+    PRSI        desplazar e ir al estado 52
+    PRMIENTRAS  desplazar e ir al estado 53
+    PRHACER     desplazar e ir al estado 54
+    PRSEGUN     desplazar e ir al estado 55
+    PRESCRIBIR  desplazar e ir al estado 56
+    PRLEER      desplazar e ir al estado 57
+    PRDEVOLVER  desplazar e ir al estado 58
+    PRTERMINAR  desplazar e ir al estado 59
+    ID          desplazar e ir al estado 60
+
+    sentencia  ir al estado 163
+    variable   ir al estado 63
+
+
+estado 161
+
+   32 sentencia: PRSEGUN LPAR variable RPAR PRHACER casos predeterminado PRFIN .
+
+    $default  reduce usando la regla 32 (sentencia)
+
+
+estado 162
+
+   40 casos: PRCASO NUM DP sentencia . casos
+   41      | PRCASO NUM DP sentencia .
+
+    PRCASO  desplazar e ir al estado 153
+
+    $default  reduce usando la regla 41 (casos)
+
+    casos  ir al estado 164
+
+
+estado 163
+
+   42 predeterminado: PRPRED DP sentencia .
+
+    $default  reduce usando la regla 42 (predeterminado)
+
+
+estado 164
+
+   40 casos: PRCASO NUM DP sentencia casos .
+
+    $default  reduce usando la regla 40 (casos)
