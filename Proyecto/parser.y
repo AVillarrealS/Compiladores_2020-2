@@ -91,8 +91,13 @@ tipo_arreglo : LCOR NUM RCOR tipo_arreglo
             | ;
 
 /*7*/
+/*
 lista_var : lista_var COMA ID
          | ID ;
+*/
+lista_var : ID lista_var1
+
+lista_var1 : COMA ID lista_var1 | ;
 
 /*8*/
 funciones : PRDEF tipo ID LPAR argumentos RPAR PRINICIO declaraciones sentencias PRFIN funciones

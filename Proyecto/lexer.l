@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "parserF.tab.h"
+#include "y.tab.h"
 %}
 
 id [a-zA-Z_][a-zA-Z_0-9]*
-esp [ \n\t\r]+
+esp [\n\t\r]+
 num [0-9]+
 caracter ['][a-zA-Z][']
 cadena ["][a-zA-Z]+["]
@@ -58,12 +58,13 @@ cadena ["][a-zA-Z]+["]
 "*"          {return MUL;}
 "/"          {return DIV;}
 "%"          {return MOD;}
-.            {printf("Error Lexico %s\n",yytext);}
+" "          {}
 {num}        {return NUM;}
 {id}         {return ID;}
 {caracter}   {return CARACTER;}
 {cadena}     {return CADENA;}
 {esp}        {}
+.            {printf("Error Lexico %s\n",yytext);}
 
 %%
 int yywrap(){
