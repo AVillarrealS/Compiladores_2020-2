@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "parser.tab.h"
+#include "y.tab.h"
 %}
 
 id [a-zA-Z_][a-zA-Z_0-9]*
