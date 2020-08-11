@@ -1,2 +1,23 @@
-ent a;
-car b;
+dreal nom;
+
+ent i;
+ent j;
+ent factorial;
+ent n;
+
+ent [8]k;
+
+estructura 
+inicio
+ent a, c;
+fin
+var;
+
+def ent factorial(ent n) inicio 
+var.a:=1;
+var.c:=1;
+mientras i<=n hacer inicio j:=j*i; i:=i+1; fin fin 
+fin
+
+
+
